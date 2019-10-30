@@ -128,16 +128,17 @@ public class JFrameDice extends JFrame implements ActionListener, ItemListener{
 		boolean winner = false;
 		boolean loser = false;
 		
-		/*//if there's an invalid input, set default to 0
+		//if there's an invalid input, set default to 0
 		try {
 			//Gets the user bet and puts it into text to convert
 			userBetString = userBetText.getText();
-			userBetAmount = Integer.getInteger(userBetString);
+			userBetAmount = Integer.parseInt(userBetString);
 		}catch(Exception ex){
 			//Sets the text and amount to 0 when it detects an error
 			userBetText.setText("0");
-			userBetAmount = 0;
-		}*/
+			userBetString = userBetText.getText();
+			userBetAmount = Integer.parseInt(userBetString);
+		}
 
 		//Decide which button as pressed
 		if(source == cashOut) {
