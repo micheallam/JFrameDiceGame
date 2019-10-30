@@ -139,40 +139,46 @@ public class JFrameDice extends JFrame implements ActionListener, ItemListener{
 			userBetString = userBetText.getText();
 			userBetAmount = Integer.parseInt(userBetString);
 		}
-
+	
 		//Decide which button as pressed
 		if(source == cashOut) {
 			//Exits out of the program
 			super.dispose();
 		}
 		else if(source == rollDice) {
-			//Random dice rolls here
-			// the dice will create a number from 0-6
-			int random1 = (int)(Math.random() * 6) + 1;
-			int random2 = (int)(Math.random() * 6) + 1;
-			int random3 = (int)(Math.random() * 6) + 1;
-			//Sets the dice to be the random numbers
-			firstDice.setText(String.valueOf(random1));
-			secondDice.setText(String.valueOf(random2));
-			thirdDice.setText(String.valueOf(random3));
-			
-			//checks if you are a winner
-			if(random1 == random2 && random1 ==random3) {
-				availableCash += userBetAmount;
-				availableCashText.setText(String.valueOf(availableCash));
-				winnerLoserText.setText("WINNER");
-				explanation.setText("Three of a Kind!");
-			}else if(random1 ==random2 || random1 == random3 || random2 == random3) {
-				availableCash += userBetAmount;
-				availableCashText.setText(String.valueOf(availableCash));
-				winnerLoserText.setText("WINNER");
-				explanation.setText("Two Pair!");
+			if(userBetAmount > availableCash) {
+				winnerLoserText.setText("Insufficient Funds");
+				explanation.setText("Please try again");
 			}else {
-				//Lost the bet
-				availableCash -= userBetAmount;
-				availableCashText.setText(String.valueOf(availableCash));
-				winnerLoserText.setText("Loser");
-				explanation.setText("Better luck next time.");
+				//Random dice rolls here
+				// the dice will create a number from 0-6
+				int random1 = (int)(Math.random() * 6) + 1;
+				int random2 = (int)(Math.random() * 6) + 1;
+				int random3 = (int)(Math.random() * 6) + 1;
+				//Sets the dice to be the random numbers
+				firstDice.setText(String.valueOf(random1));
+				secondDice.setText(String.valueOf(random2));
+				thirdDice.setText(String.valueOf(random3));
+				
+				//checks if you are a winner
+				if(random1 == random2 && random1 ==random3) {
+					availableCash += userBetAmount;
+					availableCashText.setText(String.valueOf(availableCash));
+					winnerLoserText.setText("WINNER");
+					explanation.setText("Three of a Kind!");
+				}else if(random1 ==random2 || random1 == random3 || random2 == random3) {
+					availableCash += userBetAmount;
+					availableCashText.setText(String.valueOf(availableCash));
+					winnerLoserText.setText("WINNER");
+					explanation.setText("Two Pair!");
+				}else {
+					//Lost the bet
+					availableCash -= userBetAmount;
+					availableCashText.setText(String.valueOf(availableCash));
+					winnerLoserText.setText("Loser");
+					explanation.setText("Better luck next time.");
+				}
+				
 			}
 		
 		//If game over
